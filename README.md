@@ -1,5 +1,5 @@
 # Management System
-キムヨンハンの練習プロジェクトです。
+Kyhの練習プロジェクトです。
 
 # Getting Started with Create React App
 
