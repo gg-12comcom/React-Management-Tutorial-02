@@ -7,12 +7,10 @@ test
 
 【　Add Customer API Loding View　】
 
-
   componentDidMount() {
     this.timer = setInterval(this.progress, 10); 
     // Progress bar アップデート　タイマー
 
-    
     this.callApi() 
     .then(res => this.setState({ customers: res }))
     .catch(err => console.log(err));
@@ -34,16 +32,12 @@ test
     const { completed } = this.state;
     this.setState({ completed: completed >= 100 ? 0 : completed + 2 });
   }
-
   render() {
     return (
-    
       <Paper sx={{ width: '100%', marginTop: 3, overflowX: "auto" }}>
         <Table sx={{ minWidth: 1080 }}>
-        
           <TableHead>
             <TableRow>
-            
               <TableCell>番号</TableCell>
               <TableCell>写真</TableCell>
               
