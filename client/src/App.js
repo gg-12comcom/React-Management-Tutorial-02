@@ -1,27 +1,36 @@
-import { Paper, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
+import { Paper, Table, TableHead, TableBody, TableRow, TableCell, CircularProgress } from '@mui/material';
 import { Component } from 'react';
 import './App.css';
 import Customer from './components/Customer';
 
-
 class App extends Component {
 
   state = {
-    customers: ""
+    customers: "",
+    completed: 0
   }
 
-  componentDidMount(){
-    this.callApi()
-    .then(res => this.setState({customers: res}))
+  componentDidMount() {
+    this.timer = setInterval(this.progress, 10); // Progress bar アップデート　タイマー
+    this.callApi() // call apiを削除したら　Progressの　lodingをテスト確認可能。
+    .then(res => this.setState({ customers: res }))
     .catch(err => console.log(err));
   }
 
+  componentWillUnmount() {
+    clearInterval(this.timer); // 컴포넌트 언마운트 시 타이머 정리
+  }
+
   callApi = async () => {
-    const reponse = await fetch('/api/customers');
-    const body = await reponse.json();
+    const response = await fetch('/api/customers');
+    const body = await response.json();
     return body;
   }
 
+  progress = () => {
+    const { completed } = this.state;
+    this.setState({ completed: completed >= 100 ? 0 : completed + 2 });
+  }
 
   render() {
     return (
@@ -38,8 +47,8 @@ class App extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.state.customers ? this.state.customers.map(c => {
-              return ( <Customer
+            {this.state.customers ? this.state.customers.map(c => (
+              <Customer
                 key={c.id}
                 id={c.id}
                 image={c.image}
@@ -47,8 +56,14 @@ class App extends Component {
                 birthday={c.birthday}
                 gender={c.gender}
                 job={c.job}
-              />);
-  }) : ""}
+              />
+            )) : 
+            <TableRow>
+              <TableCell colSpan="6" align="center">
+                <CircularProgress sx={{ margin: 2 }} variant="determinate" value={this.state.completed} />
+                {/* {/* variant="indeterminate" を　設定すれば valuと　関係なく　くるくる　回る/} */}
+              </TableCell>
+            </TableRow>}
           </TableBody>
         </Table>
       </Paper>
