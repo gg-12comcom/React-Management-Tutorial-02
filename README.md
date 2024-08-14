@@ -5,6 +5,9 @@ test
 
 
 
+Add Customer API Loding View
 
-![Uploading image.png…]()
+
+
+![image](https://github.com/user-attachments/assets/1a859bf0-8490-4bda-a611-4db8441551fe)
 
