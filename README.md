@@ -5,7 +5,7 @@ test
 
 
 
-Add Customer API Loding View
+【　Add Customer API Loding View　】
 
 
   componentDidMount() {
