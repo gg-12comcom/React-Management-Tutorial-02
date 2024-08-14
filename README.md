@@ -7,27 +7,21 @@ test
 
 Add Customer API Loding View
 
-import { Paper, Table, TableHead, TableBody, TableRow, TableCell, CircularProgress } from '@mui/material';
-import { Component } from 'react';
-import './App.css';
-import Customer from './components/Customer';
-
-class App extends Component {
-
-  state = {
-    customers: "",
-    completed: 0
-  }
 
   componentDidMount() {
-    this.timer = setInterval(this.progress, 10); // Progress bar アップデート　タイマー
-    this.callApi() // call apiを削除したら　Progressの　lodingをテスト確認可能。
+    this.timer = setInterval(this.progress, 10); 
+    // Progress bar アップデート　タイマー
+
+    
+    this.callApi() 
     .then(res => this.setState({ customers: res }))
     .catch(err => console.log(err));
+    // call apiを削除したら　Progressの　lodingをテスト確認可能。
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer); // 컴포넌트 언마운트 시 타이머 정리
+    clearInterval(this.timer); 
+    // コンポーネントがアンマウントしタイマーの処理
   }
 
   callApi = async () => {
@@ -68,9 +62,11 @@ class App extends Component {
               />
             )) : 
             <TableRow>
+            
               <TableCell colSpan="6" align="center">
                 <CircularProgress sx={{ margin: 2 }} variant="determinate" value={this.state.completed} />
                 {/* {/* variant="indeterminate" を　設定すれば valuと　関係なく　くるくる　回る/} */}
+                
               </TableCell>
             </TableRow>}
           </TableBody>
