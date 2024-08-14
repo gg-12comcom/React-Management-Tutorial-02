@@ -16,7 +16,7 @@ test
     .catch(err => console.log(err));
     // call apiを削除したら　Progressの　lodingをテスト確認可能。
   }
-
+  
   componentWillUnmount() {
     clearInterval(this.timer); 
     // コンポーネントがアンマウントしタイマーの処理
